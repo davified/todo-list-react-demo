@@ -19,4 +19,15 @@ describe("TodoList", () => {
 
     expect(getByText("my new todo")).toBeDefined();
   });
+
+  it("should mark a todo as done when clicked", () => {
+    const { getByText, getByLabelText } = render(<TodoList />);
+    const someTodo = getByText("buy milk");
+
+    expect(someTodo.classList.contains("done")).toEqual(false);
+
+    fireEvent.click(someTodo);
+
+    expect(someTodo.classList.contains("done")).toEqual(true);
+  });
 });
