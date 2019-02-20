@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TodoList renders correctly 1`] = `
+<div
+  id="todo-list"
+>
+  <h1
+    id="todo-title"
+  >
+    Awesome todo list
+  </h1>
+  <li
+    className=""
+    onClick={[Function]}
+  >
+    buy milk
+  </li>
+  <li
+    className=""
+    onClick={[Function]}
+  >
+    drink juice
+  </li>
+  <li
+    className=""
+    onClick={[Function]}
+  >
+    eat lunch
+  </li>
+  <li
+    className=""
+    onClick={[Function]}
+  >
+    learn react
+  </li>
+  <li
+    className=""
+    onClick={[Function]}
+  >
+    go home
+  </li>
+  <form
+    onSubmit={[Function]}
+  >
+    <label>
+      Add todo:
+      <input
+        id="inputText"
+        onChange={[Function]}
+        type="text"
+        value=""
+      />
+    </label>
+    <input
+      id="submit"
+      type="submit"
+      value="Submit"
+    />
+  </form>
+</div>
+`;

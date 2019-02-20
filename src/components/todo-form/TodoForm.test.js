@@ -1,22 +1,35 @@
 import React from "react";
-import { shallow } from "enzyme";
+import {
+  render,
+  fireEvent,
+  cleanup,
+  waitForElement
+} from "react-testing-library";
+import "jest-dom/extend-expect";
 import TodoForm from "./TodoForm";
 
+afterEach(cleanup);
+
 describe("TodoForm", () => {
-  it("should call function supplied via props", () => {
-    const mockHandler = jest.fn();
-    const wrapper = shallow(<TodoForm submitTodo={mockHandler} />);
+  it("should call submit function and clear input when form is submitted", () => {
+    const mockSubmit = jest.fn();
+    const { getByText, getByLabelText } = render(
+      <TodoForm submitTodo={mockSubmit} />
+    );
+    const submitButton = getByText("Submit");
 
-    wrapper.find("form").simulate("submit", { preventDefault() {} });
+    fireEvent.click(submitButton);
 
-    expect(mockHandler).toBeCalled();
+    expect(mockSubmit).toBeCalledTimes(1);
+    expect(getByLabelText(/Add todo:/i)).toHaveTextContent("");
   });
 
-  it("should setState when key is pressed", () => {
-    const wrapper = shallow(<TodoForm submitTodo={() => {}} />);
+  it("should update input field when user types", () => {
+    const { getByLabelText } = render(<TodoForm submitTodo={() => {}} />);
+    const inputBox = getByLabelText(/Add todo:/i);
 
-    wrapper.find("#inputText").simulate("change", { target: { value: "a" } });
+    fireEvent.change(inputBox, { target: { value: "abc" } });
 
-    expect(wrapper.state().newTodo.description);
+    expect(inputBox.value).toEqual("abc");
   });
 });
